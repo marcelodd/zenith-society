@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Activities</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Date</th>
+                <th scope="col">Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% activities.forEach(function(activity) { %>
+
+            <tr>
+                <th><%= activity.description %></th>
+                <td><%= activity.createdAt %></td>
+                <td><a type="button" class="btn btn-success" href="/edit-activity/<%= activity._id %>">Edit</a></td>
+                <td><a type="button" class="btn btn-danger" onclick="deleteActivity('<%= activity._id %>')">Delete</a></td>
+            </tr>
+
+            <% }); %>
+
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-lg-1">
+                <a type="button" class="btn btn-primary" href="/new-activity">New</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+
+<script>
+    function deleteActivity (_id) {
+        if (window.confirm("Delete this item ?")) {
+            $.post('/api/delete-activity/',{_id: _id},function(result){
+                alert(JSON.stringify(result)); //For now i have just added an alert.
+                location.reload();
+            });
+        }
+    }
+</script>
+</body>
+</html>

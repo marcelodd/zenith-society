@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main style="padding-left: 20%; padding-right: 20%;">
+    <div class="jumbotron" >
+        <h3>Assign activity</h3>
+
+        <form method="post" action="/api/add-activity">
+
+            <div class="form-group row">
+                <label for="example-date-input" class="col-2 col-form-label">Description</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" name="description">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Activity</button>
+            <a type="button" class="btn btn-danger" href="/activities">Cancel</a>
+        </form>
+
+    </div>
+</main>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>

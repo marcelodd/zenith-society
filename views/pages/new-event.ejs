@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main style="padding-left: 20%; padding-right: 20%;">
+    <div class="jumbotron" >
+        <h3>Assign events</h3>
+
+        <form>
+            <div class="form-group row">
+                <label for="exampleSelect1">Activity Name</label>
+                <select class="form-control" id="exampleSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label for="example-date-input" class="col-2 col-form-label">Date Event</label>
+                <div class="col-10">
+                    <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="example-time-input" class="col-2 col-form-label">Start hour</label>
+                <div class="col-10">
+                    <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="example-time-input" class="col-2 col-form-label">End hour</label>
+                <div class="col-10">
+                    <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Event</button>
+            <button type="button" class="btn btn-danger">Cancel</button>
+        </form>
+
+    </div>
+</main>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
