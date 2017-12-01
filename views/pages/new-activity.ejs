@@ -10,10 +10,10 @@
 </header>
 
 <main style="padding-left: 20%; padding-right: 20%;">
-    <div class="jumbotron" >
+    <div class="jumbotron">
         <h3>Assign activity</h3>
 
-        <form method="post" action="/api/add-activity">
+        <form id="newForm">
 
             <div class="form-group row">
                 <label for="example-date-input" class="col-2 col-form-label">Description</label>
@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add Activity</button>
+            <a onclick="addActivity()" class="btn btn-primary">Add Activity</a>
             <a type="button" class="btn btn-danger" href="/activities">Cancel</a>
         </form>
 
@@ -32,6 +32,24 @@
 <footer>
     <% include ../partials/footer %>
 </footer>
+
+<script>
+    function addActivity() {
+
+        $.ajax({
+            url: "/api/add-activity",
+            type: 'POST',
+            data : $("#newForm").serialize(),
+            success: function (result) {
+                alert(result);
+                window.location.href = '/activities';
+            },
+            error: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

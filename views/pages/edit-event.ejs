@@ -11,14 +11,20 @@
 
 <main style="padding-left: 20%; padding-right: 20%;">
     <div class="jumbotron">
-        <h3>Assign events</h3>
+        <h3>Edit Event</h3>
 
-        <form id="newEvent">
+        <form id="editEvent">
+            <input class="form-control" style="visibility: hidden;" name="_id" value="<%= event._id%>">
+
             <div class="form-group row">
                 <label for="exampleSelect1">Activity Name</label>
                 <select class="form-control" name="activityType" id="exampleSelect1">
                     <% activities.forEach(function(activity) { %>
+                    <% if(!event.activityType._id.equals(activity._id)){ %>
                     <option value="<%= activity._id %>"><%= activity.description %></option>
+                    <% }else{ %>
+                    <option value="<%= activity._id %>" selected><%= activity.description %></option>
+                    <% } %>
                     <% }); %>
                 </select>
             </div>
@@ -26,24 +32,24 @@
             <div class="form-group row">
                 <label for="example-date-input" class="col-2 col-form-label">Date Event</label>
                 <div class="col-10">
-                    <input class="form-control" type="date" name="date"  id="example-date-input">
+                    <input class="form-control" type="date" name="date" value="<%= event.date%>"  id="example-date-input">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="example-time-input" class="col-2 col-form-label">Start hour</label>
                 <div class="col-10">
-                    <input class="form-control" name="startHour" type="time" id="example-time-input">
+                    <input class="form-control" name="startHour" type="time" value="<%= event.startHour%>" id="example-time-input">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="example-time-input" class="col-2 col-form-label">End hour</label>
                 <div class="col-10">
-                    <input class="form-control" name="endHour" type="time" id="example-time-input">
+                    <input class="form-control" name="endHour" type="time" value="<%= event.endHour%>" id="example-time-input">
                 </div>
             </div>
-            <a onclick="addEvent()" class="btn btn-primary">Add Event</a>
+            <a onclick="saveEvent()" class="btn btn-primary">Save Event</a>
             <a type="button" href="/" class="btn btn-danger">Cancel</a>
         </form>
 
@@ -55,12 +61,12 @@
 </footer>
 
 <script>
-    function addEvent() {
+    function saveEvent() {
 
         $.ajax({
-            url: "/api/add-event",
+            url: "/api/save-event",
             type: 'POST',
-            data: $("#newEvent").serialize(),
+            data: $("#editEvent").serialize(),
             success: function (result) {
                 alert(result);
                 window.location.href = '/';

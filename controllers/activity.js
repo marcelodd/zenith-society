@@ -6,20 +6,21 @@ let ActivityController = {
 
         activityType.save()
             .then(result => {
-                ActivityController.findAllActivity(req, res);
-            });
+                res.status(200).json('Success!');
+            }).catch(err => {
+                console.log(err);
+            res.status(404).json('Error: ' + err.message);
+        })
     },
     findAllActivity: function (req, res) {
         ActivityType.find()
             .then(activities => {
-                console.log(activities);
                 res.render('pages/activities', {activities: activities, selectedId: null});
             })
     },
     editActivity: function (req, res) {
         ActivityType.find({_id: req.params.id})
             .then(activity => {
-                //console.log(activity);
                 res.render('pages/edit-activity', {activity: activity[0]});
             })
     },
@@ -38,7 +39,7 @@ let ActivityController = {
             }).catch(err => {
             res.status(404).json('Error: ' + err.message);
         })
-    },
+    }
 }
 
 module.exports = ActivityController;
