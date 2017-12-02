@@ -63,7 +63,7 @@
             data: $("#newEvent").serialize(),
             success: function (result) {
                 alert(result);
-                window.location.href = '/';
+                window.location.href = '/events';
             },
             error: function (err) {
                 alert(JSON.stringify(err));

@@ -4,7 +4,11 @@ const ActivityController = require('../controllers/activity');
 const EventController = require('../controllers/event');
 
 /*Pages*/
-router.get('/', EventController.findAllEvent);
+router.get('/', function (req, res) {
+    res.render('dist/index.html');
+});
+
+router.get('/events', EventController.findAllEvent);
 
 router.get('/new-event', EventController.newEvent);
 

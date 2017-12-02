@@ -22,13 +22,15 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(express.static(path.join(__dirname, 'dist')));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', adm);
 app.use('/api', api);
@@ -38,6 +40,10 @@ app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 // error handler
