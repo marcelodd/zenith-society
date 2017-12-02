@@ -1,5 +1,6 @@
-const Event = require('../models/event');
-const ActivityType = require('../models/activity-type');
+const Event = require('../models/event'),
+    ActivityType = require('../models/activity-type'),
+    moment = require('moment');
 
 let EventController = {
     newEvent: function (req, res) {
@@ -58,6 +59,28 @@ let EventController = {
             }).catch(err => {
             res.status(404).json('Error: ' + err.message);
         })
+    },
+    findEventsWeek: function (req, res) {
+        try {
+            let now = new Date();
+            let dayOfWeek = now.getDay();
+            let startDate = new Date(now.setDate(now.getDate() + (1 - dayOfWeek)));
+            now = new Date(startDate);
+            let endDate = new Date(now.setDate(now.getDate() + 6));
+
+            console.log(startDate);
+            console.log(endDate);
+
+            Event.find({date: {$gte: startDate, $lt: endDate}, isActive: true})
+                .populate('activityType')
+                .exec(function (err, events) {
+                    res.status(200).json(events);
+                }).catch(err => {
+                console.log(err);
+            })
+        } catch (e) {
+            console.log(e);
+        }
     }
 };
 

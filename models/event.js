@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var eventSchema = new Schema({
-    date: {type: String, required: 'Date cannot be blank'},
+    date: {type: Date, required: 'Date cannot be blank'},
     startHour: {type: String, required: 'Start hour cannot be blank'},
     endHour: {type: String, required: 'End hour cannot be blank'},
     isActive: {type: Boolean, default: true},

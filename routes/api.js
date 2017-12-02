@@ -11,4 +11,6 @@ router.post('/add-event', EventController.addEvent);
 router.post('/save-event', EventController.saveEvent);
 router.post('/delete-event', EventController.deleteEvent);
 
+router.get('/events-week', EventController.findEventsWeek);
+
 module.exports = router;
