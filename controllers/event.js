@@ -66,7 +66,7 @@ let EventController = {
             let dayOfWeek = now.getDay();
             let startDate = new Date(now.setDate(now.getDate() + (1 - dayOfWeek)));
             now = new Date(startDate);
-            let endDate = new Date(now.setDate(now.getDate() + 6));
+            let endDate = new Date(now.setDate(now.getDate() + 7));
 
             console.log(startDate);
             console.log(endDate);

@@ -1,11 +1,19 @@
 <nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid">
+    <div class="container-fluid">
 
-		<ul class="nav navbar-nav">
-			<li><a href="/">Panel</a></li>
-			<li><a href="/activities">Activity</a></li>
-			<li><a href="/events">Events</a></li>
-		</ul>
-	  
-	</div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Panel</a></li>
+            <li><a href="/activities">Activity</a></li>
+            <li><a href="/events">Events</a></li>
+        </ul>
+
+    </div>
 </nav>
+
+<div class="alert alert-danger alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="$('.alert-danger').hide();">&times;</a>
+</div>
+
+<script>
+    $('.alert-danger').hide();
+</script>

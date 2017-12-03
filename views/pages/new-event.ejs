@@ -16,7 +16,7 @@
         <form id="newEvent">
             <div class="form-group row">
                 <label for="exampleSelect1">Activity Name</label>
-                <select class="form-control" name="activityType" id="exampleSelect1">
+                <select class="form-control" name="activityType" id="activityType">
                     <% activities.forEach(function(activity) { %>
                     <option value="<%= activity._id %>"><%= activity.description %></option>
                     <% }); %>
@@ -26,21 +26,21 @@
             <div class="form-group row">
                 <label for="example-date-input" class="col-2 col-form-label">Date Event</label>
                 <div class="col-10">
-                    <input class="form-control" type="date" name="date"  id="example-date-input">
+                    <input class="form-control" type="date" name="date" id="date">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="example-time-input" class="col-2 col-form-label">Start hour</label>
                 <div class="col-10">
-                    <input class="form-control" name="startHour" type="time" id="example-time-input">
+                    <input class="form-control" name="startHour" type="time" id="startHour">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="example-time-input" class="col-2 col-form-label">End hour</label>
                 <div class="col-10">
-                    <input class="form-control" name="endHour" type="time" id="example-time-input">
+                    <input class="form-control" name="endHour" type="time" id="endHour">
                 </div>
             </div>
             <a onclick="addEvent()" class="btn btn-primary">Add Event</a>
@@ -55,7 +55,37 @@
 </footer>
 
 <script>
+
+    function validate(id, msg) {
+        if ($('#' + id).val() == '') {
+            $('.alert-danger').text(msg);
+            $('.alert-danger').show();
+            setTimeout(function () {
+                $('.alert-danger').hide();
+            }, 2000);
+
+            return false;
+        }
+
+        return true;
+    }
+
     function addEvent() {
+        if (!validate('activityType', 'Activity type is required!')) {
+            return;
+        }
+
+        if (!validate('date', 'Date is required!')) {
+            return;
+        }
+
+        if (!validate('startHour', 'Start hour is required!')) {
+            return;
+        }
+
+        if (!validate('endHour', 'End hour is required!')) {
+            return;
+        }
 
         $.ajax({
             url: "/api/add-event",

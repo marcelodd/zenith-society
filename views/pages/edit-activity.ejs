@@ -20,11 +20,11 @@
                 <div class="col-10">
                     <input class="form-control" type="text" name="_id" value="<%= activity._id %>"
                            style="visibility: hidden;">
-                    <input class="form-control" type="text" name="description" value="<%= activity.description %>">
+                    <input class="form-control" type="text" name="description" value="<%= activity.description %>" id="description">
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" onclick="saveActivity()">Save Activity</button>
+            <a class="btn btn-primary" onclick="saveActivity()">Save Activity</a>
             <a type="button" class="btn btn-danger" href="/activities">Cancel</a>
         </form>
 
@@ -37,10 +37,22 @@
 
 <script>
     function saveActivity() {
+
+        if ($('#description').val() == '') {
+            $('.alert-danger').text("Description is required!");
+            $('.alert-danger').show();
+            setTimeout(function () {
+                $('.alert-danger').hide();
+            }, 2000);
+
+            return;
+        }
+
         $.post('/api/save-activity', $("#myForm").serialize(), function (result) {
             alert(JSON.stringify(result)); //For now i have just added an alert.
             window.location.href = '/activities';
         });
+
     }
 </script>
 

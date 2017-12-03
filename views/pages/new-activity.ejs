@@ -13,12 +13,12 @@
     <div class="jumbotron">
         <h3>Assign activity</h3>
 
-        <form id="newForm">
+        <form id="newForm" data-toggle="validator" role="form">
 
             <div class="form-group row">
                 <label for="example-date-input" class="col-2 col-form-label">Description</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" name="description">
+                    <input class="form-control" type="text" name="description" id="description">
                 </div>
             </div>
 
@@ -35,11 +35,20 @@
 
 <script>
     function addActivity() {
+        if ($('#description').val() == '') {
+            $('.alert-danger').text("Description is required!");
+            $('.alert-danger').show();
+            setTimeout(function () {
+                $('.alert-danger').hide();
+            }, 2000);
+
+            return;
+        }
 
         $.ajax({
             url: "/api/add-activity",
             type: 'POST',
-            data : $("#newForm").serialize(),
+            data: $("#newForm").serialize(),
             success: function (result) {
                 alert(result);
                 window.location.href = '/activities';
