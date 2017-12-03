@@ -64,12 +64,14 @@ let EventController = {
         try {
             let now = new Date();
             let dayOfWeek = now.getDay();
-            let startDate = new Date(now.setDate(now.getDate() + (1 - dayOfWeek)));
+            let startDate;
+            if (dayOfWeek == 0) {
+                startDate = new Date(now.setDate(now.getDate() - 6));
+            } else {
+                startDate = new Date(now.setDate(now.getDate() + (1 - dayOfWeek)));
+            }
             now = new Date(startDate);
-            let endDate = new Date(now.setDate(now.getDate() + 7));
-
-            console.log(startDate);
-            console.log(endDate);
+            let endDate = new Date(now.setDate(now.getDate() + 6));
 
             Event.find({date: {$gte: startDate, $lt: endDate}, isActive: true})
                 .populate('activityType')
