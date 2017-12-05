@@ -4,7 +4,7 @@ const ActivityController = require('../controllers/activity');
 const EventController = require('../controllers/event');
 
 /*Pages*/
-router.get('/events', EventController.findAllEvent);
+router.get('/admin', EventController.findAllEvent);
 
 router.get('/new-event', EventController.newEvent);
 

@@ -45,7 +45,7 @@ let EventController = {
                 Event.find({_id: req.params.id})
                     .populate('activityType')
                     .exec(function (err, events) {
-                        console.log(events[0]);
+                        console.log('TESTE', events);
                         res.render('pages/edit-event', {activities: activities, event: events[0]});
                     })
 

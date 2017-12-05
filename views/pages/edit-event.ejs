@@ -32,8 +32,10 @@
             <div class="form-group row">
                 <label for="example-date-input" class="col-2 col-form-label">Date Event</label>
                 <div class="col-10">
+                    <input class="form-control" type="text" value="<%= event.date %>"
+                           id="dateAux" style="visibility: hidden;">
                     <input class="form-control" type="date" name="date" value="<%= event.date %>"
-                           id="example-date-input">
+                           id="date">
                 </div>
             </div>
 
@@ -64,6 +66,23 @@
 </footer>
 
 <script>
+
+    var date = new Date($("#dateAux").val());
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    if (day < 10) {
+        day = '0' + day;
+    }
+
+    if(monthIndex < 10){
+        monthIndex = '0' + monthIndex;
+    }
+
+    $("#date").val(year + '-' + monthIndex + '-' + day);
+
     function validate(id, msg) {
         if ($('#' + id).val() == '') {
             $('.alert-danger').text(msg);
@@ -102,7 +121,7 @@
             data: $("#editEvent").serialize(),
             success: function (result) {
                 alert(result);
-                window.location.href = '/events';
+                window.location.href = '/admin';
             },
             error: function (err) {
                 alert(JSON.stringify(err));
